@@ -15,7 +15,7 @@ you'll measure the result, prove the original never moved, and throw the fork aw
 
 ## What you'll learn
 
-- How to connect Tiger MCP to Claude Code, Codex, GitHub Copilot CLI, or any MCP-capable
+- How to connect Tiger MCP to Claude Code, Codex, GitHub Copilot CLI, Gemini CLI / Google Antigravity, or any MCP-capable
   coding agent
 - How to fork a Tiger Cloud service so agent-driven changes never touch the original
 - How to have an agent diagnose slow queries from `EXPLAIN` plans and built-in Tiger Data
@@ -42,7 +42,7 @@ entire workshop — you need two services and you get two.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/timescale/fork-break-fix-delete-workshop)
 
-Give it a few minutes on first boot. It installs `jq`, the Tiger CLI, and three coding
+Give it a few minutes on first boot. It installs `jq`, the Tiger CLI, and four coding
 agent CLIs. When it's done you'll see a banner in the terminal.
 
 Every command below runs from the repo root, which is where the Codespace drops you. Your
@@ -67,7 +67,7 @@ tiger service list
 
 ### 4. Authenticate your coding agent
 
-You bring your own. All three are already installed. Pick one — in order of how likely it
+You bring your own. All four are already installed. Pick one — in order of how likely it
 is to just work:
 
 <details>
@@ -121,10 +121,24 @@ spins up an OAuth callback on `localhost:1455` that the browser on your laptop c
 `codex login --api-key` is the fallback if you have an OpenAI API key.
 </details>
 
+<details>
+<summary><b>Google (Gemini CLI / Antigravity)</b> — free Google account WebAuth or Gemini API key</summary>
+
+```bash
+gemini
+```
+
+On first launch, select **"Sign in with Google"** to authenticate via your browser using your Google account (personal or Google One / AI Premium). It saves your credentials locally and works directly in the Codespace terminal.
+
+`export GEMINI_API_KEY="your-api-key"` is the fallback if you have an API key from Google AI Studio.
+
+*(If working on your local machine using the **Google Antigravity IDE**, your session is already signed in with your Google account — run `tiger mcp install antigravity` and open the repo).*
+</details>
+
 ### 5. Install Tiger MCP into your agent
 
 ```bash
-tiger mcp install claude-code    # or: codex | copilot
+tiger mcp install claude-code    # or: codex | copilot | gemini | antigravity
 ```
 
 Then start your agent and ask it something like *"list my Tiger Cloud services"*. If it
@@ -216,8 +230,8 @@ Ten columns, all `text`. No keys, no indexes, no hypertable. It's meant to hurt.
 
 ### 8. Have your agent load the data
 
-This is the first thing you'll ask an agent to do. Start it (`claude`, `codex`, or
-`copilot`) and give it this:
+This is the first thing you'll ask an agent to do. Start it (`claude`, `codex`,
+`copilot`, or `gemini`) and give it this:
 
 > **Prompt 1 — ingest**
 >
@@ -514,6 +528,9 @@ rather than the Codespace, run it yourself and log in again.
 **`codex login` hangs, or the browser can't reach `localhost:1455`**
 Use `codex login --device-auth`, and make sure "Device Code Authorisation" is enabled in
 your ChatGPT security settings. See step 4 above.
+
+**`gemini` browser sign-in completes but nothing happens in the terminal**
+Copy the authorization code from the browser and paste it at the terminal prompt. If Codespaces doesn't route the localhost callback, set `export GEMINI_API_KEY="..."` as a fallback.
 
 **Claude Code's browser sign-in completes but the terminal doesn't notice**
 Copy the code from the browser and paste it at the `Paste code here if prompted` prompt.

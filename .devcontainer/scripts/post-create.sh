@@ -24,8 +24,8 @@ echo "==> Configuring Tiger CLI credential storage"
 # This is the single most common way this setup fails on Linux.
 tiger config set password_storage pgpass
 
-echo "==> Installing coding agents (claude, codex, copilot)"
-npm install -g --silent @anthropic-ai/claude-code @openai/codex @github/copilot
+echo "==> Installing coding agents (claude, codex, copilot, gemini)"
+npm install -g --silent @anthropic-ai/claude-code @openai/codex @github/copilot @google/gemini-cli
 
 # Nothing else to install. The dataset ships as gzipped SQL in data/load/ and
 # loads through `tiger db query` -- no database driver, no client library, and
@@ -36,7 +36,7 @@ cat <<'BANNER'
   ────────────────────────────────────────────────────────────────
    Fork, Break, Fix, Delete — container ready
 
-   Installed: jq, tiger, claude, codex, copilot
+   Installed: jq, tiger, claude, codex, copilot, gemini
 
    You still need to authenticate. Open
        README.md
@@ -44,7 +44,7 @@ cat <<'BANNER'
 
    Short version:
        tiger auth login --headless
-       tiger mcp install claude-code     # or codex / copilot
+       tiger mcp install claude-code     # or codex / copilot / gemini / antigravity
        tiger service create --name fbfd-original --cpu shared --memory shared
   ────────────────────────────────────────────────────────────────
 

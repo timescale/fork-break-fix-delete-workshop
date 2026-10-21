@@ -1,6 +1,6 @@
 # Agent instructions — Fork, Break, Fix, Delete workshop
 
-Read by Claude Code, Codex, and GitHub Copilot CLI. Launch your agent from the repo
+Read by Claude Code, Codex, GitHub Copilot CLI, Gemini CLI, and Google Antigravity. Launch your agent from the repo
 root and it picks up this file and the permission rules in `.claude/settings.json`
 automatically.
 
